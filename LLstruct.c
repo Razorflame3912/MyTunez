@@ -6,9 +6,10 @@ struct node {char name[256]; char artist[256]; struct node *next;};
 struct node *HEAD = NULL;
 
 void print_list(struct node *head){
-  while(head){
-    printf("%s by %s -> ",head->name, head->artist);
-    head = head->next;
+  struct node *tmp = head;
+  while(tmp){
+    printf("%s by %s -> ",tmp->name, tmp->artist);
+    tmp = tmp->next;
   }
   printf("\n");
 }
@@ -31,12 +32,41 @@ struct node* free_list(struct node *head){
   return NULL;
 }
 
+struct node* find_name(struct node *head, char* s){
+  struct node* tmp = head;
+  while(tmp){
+    if(strcmp(tmp->name,s) == 0){
+      return tmp;
+    }
+    tmp = tmp->next;
+  }
+  return tmp;
+
+}
+
+struct node* find_artist(struct node *head, char* s){
+  struct node* tmp = head;
+  while(tmp){
+    if(strcmp(tmp->artist,s) == 0){
+      return tmp;
+    }
+    tmp = tmp->next;
+  }
+  return tmp;
+
+}
+
+
 int main(){
   int i = 8;
   insert_front(HEAD, "Demons", "Imagine Dragons");
   insert_front(HEAD, "Hello", "Adele");
-  insert_front(HEAD, "Baby", "Justin Beliver");
+  insert_front(HEAD, "Baby", "Justin Bieber");
   print_list(HEAD);
+  print_list(find_name(HEAD,"Hello"));
+  print_list(find_name(HEAD,"Chandelier"));
+  print_list(find_artist(HEAD,"Imagine Dragons"));
+  print_list(find_artist(HEAD,"Maroon 5"));
   free_list(HEAD);
   //Test call of print_list to show free_list worked.
   //print_list(HEAD);
