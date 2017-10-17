@@ -1,4 +1,4 @@
-playlist: LLstruct.c
+out: LLstruct.c
 	gcc -o out LLstruct.c
 run: out
 	./out
