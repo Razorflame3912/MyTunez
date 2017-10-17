@@ -9,7 +9,6 @@ struct node {
     struct node *next;
 };
 
-struct node *HEAD = NULL;
 
 void print_list(struct node *head){
   struct node *tmp = head;
@@ -26,7 +25,6 @@ struct node* insert_front(struct node *head, char *newname, char *newart){
   strcpy(new_node->name,newname);
   strcpy(new_node->artist, newart);
   new_node->next = head;
-  HEAD = new_node;
   return new_node;
 }
 
@@ -97,91 +95,97 @@ struct node* random_pick(struct node *head){
 
 }
 
-struct node* insert_order(struct node *head, char *newname, char *newart ){
-  if(!head){
+struct node* insert_order(struct node *head, char *newname, char *newart){
+  
+  struct node *tmp = head;
+  
+  if(!tmp){
     return insert_front(head,newname,newart);
   }
   struct node *follow = NULL;
   struct node *new_node = (struct node*)malloc(sizeof(struct node));
   strcpy(new_node->name,newname);
   strcpy(new_node->artist, newart);  
-  while(head){
-    if(strcmp(new_node->artist,head->artist) > 0){
+  while(tmp){
+    if(strcmp(new_node->artist,tmp->artist) > 0){
 
     }
-    else if(strcmp(new_node->artist,head->artist) < 0){
-      new_node->next = head;
+    else if(strcmp(new_node->artist,tmp->artist) < 0){
+      new_node->next = tmp;
       if(follow){
 	follow->next = new_node;
       }
       else{
-	HEAD = new_node;
+	head = new_node;
       }
-      return new_node;
+      return head;
+
     }
     
     else{
-      if(strcmp(new_node->name,head->name) > 0){
+      if(strcmp(new_node->name,tmp->name) > 0){
 
       }
       
-      else if(strcmp(new_node->name,head->name) <= 0){
+      else if(strcmp(new_node->name,tmp->name) <= 0){
 
-	new_node->next = head;
+	new_node->next = tmp;
 	if(follow){
 	  follow->next = new_node;
 	}
 	else{
-	  HEAD = new_node;
+	  head = new_node;
 	}
-	return new_node;
+	return head;
       }
 
     }
 
-    follow = head;
-    head = head->next;
+    follow = tmp;
+    tmp = tmp->next;
     //printf("%s\n",follow->artist);
-    if(head){
-      //printf("%s\n---\n",head->artist);
+    if(tmp){
+      //printf("%s\n---\n",tmp->artist);
     }
       
 
   }
   follow->next = new_node;
   new_node->next = NULL;
-  return new_node;
+  return head;
 
 }
 
 
 int main(){
+  
   srand(time(NULL));
-  insert_order(HEAD, "Demons", "Imagine Dragons");
-  print_list(HEAD);
-  insert_order(HEAD, "Hello", "Adele");
-  print_list(HEAD);
-  insert_order(HEAD, "Baby", "Justin Bieber");
-  print_list(HEAD);
-  insert_order(HEAD, "Radioactive", "Imagine Dragons");
-  print_list(HEAD);
+  struct node *head = NULL;
+  head = insert_order(head, "Demons", "Imagine Dragons");
+  print_list(head);
+  head = insert_order(head, "Hello", "Adele");
+  print_list(head);
+  head = insert_order(head, "Baby", "Justin Bieber");
+  print_list(head);
+  head = insert_order(head, "Radioactive", "Imagine Dragons");
+   print_list(head);
   printf("Looking for Hello...\n");
-  print_list(find_name(HEAD,"Hello"));
+  print_list(find_name(head,"Hello"));
   printf("Looking for Chandelier...\n");
-  print_list(find_name(HEAD,"Chandelier"));
+  print_list(find_name(head,"Chandelier"));
   printf("Looking for Imagine Dragons...\n");
-  print_list(find_artist(HEAD,"Imagine Dragons"));
+  print_list(find_artist(head,"Imagine Dragons"));
   printf("Looking for Maroon 5...\n");
-  print_list(find_artist(HEAD,"Maroon 5"));
-  printf("Length of list is %d\n", list_len(HEAD));
+  print_list(find_artist(head,"Maroon 5"));
+  printf("Length of list is %d\n", list_len(head));
 
   int n = 0;
   for(n;n<10;n++){
-    printf("%s\n",random_pick(HEAD)->name);
+    printf("%s\n",random_pick(head)->name);
   }
-  HEAD = free_list(HEAD);
+  head = free_list(head);
   //Test call of print_list to show free_list worked.
   printf("Printing freed list...\n");
-  print_list(HEAD);
+  print_list(head);
   return 0;
 }
