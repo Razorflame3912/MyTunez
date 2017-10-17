@@ -3,27 +3,27 @@
 #include <string.h>
 #include <time.h>
 
-struct node {char name[256]; char artist[256]; struct node *next;};
-struct node *HEAD = NULL;
+struct node {
+    char name[256]; 
+    char artist[256]; 
+    struct node *next;
+};
+
 void print_list(struct node *head){
   struct node *tmp = head;
   while(tmp){
-    printf("%s by %s -> ",tmp->name, tmp->artist);
+    printf("%s by %s, ",tmp->name, tmp->artist);
     tmp = tmp->next;
   }
   printf("\n");
 }
 
-void initrand(){
-  srand(time(NULL));
-}
 
 struct node* insert_front(struct node *head, char *newname, char *newart){
   struct node *new_node = (struct node*)malloc(sizeof(struct node));
   strcpy(new_node->name,newname);
   strcpy(new_node->artist, newart);
   new_node->next = head;
-  HEAD = new_node;
   return new_node;
 }
 
@@ -96,23 +96,29 @@ struct node* random_pick(struct node *head){
 
 
 int main(){
-  int i = 8;
-  initrand();
-  insert_front(HEAD, "Demons", "Imagine Dragons");
-  insert_front(HEAD, "Hello", "Adele");
-  insert_front(HEAD, "Baby", "Justin Bieber");
-  print_list(HEAD);
-  print_list(find_name(HEAD,"Hello"));
-  print_list(find_name(HEAD,"Chandelier"));
-  print_list(find_artist(HEAD,"Imagine Dragons"));
-  print_list(find_artist(HEAD,"Maroon 5"));
-  printf("Length of list is %d\n", list_len(HEAD));
+  srand(time(NULL));
+  struct node *head = NULL;
+  head = insert_front(head, "Demons", "Imagine Dragons");
+  head = insert_front(head, "Hello", "Adele");
+  head = insert_front(head, "Baby", "Justin Bieber");
+  print_list(head);
+  printf("Looking for Hello...\n");
+  print_list(find_name(head,"Hello"));
+  printf("Looking for Chandelier...\n");
+  print_list(find_name(head,"Chandelier"));
+  printf("Looking for Imagine Dragons...\n");
+  print_list(find_artist(head,"Imagine Dragons"));
+  printf("Looking for Maroon 5...\n");
+  print_list(find_artist(head,"Maroon 5"));
+  printf("Length of list is %d\n", list_len(head));
+
   int n = 0;
   for(n;n<10;n++){
-    printf("%s\n",random_pick(HEAD) -> name);
+    printf("%s\n",random_pick(head)->name);
   }
-  free_list(HEAD);
+  head = free_list(head);
   //Test call of print_list to show free_list worked.
-  //print_list(HEAD);
+  printf("Printing freed list...\n");
+  print_list(head);
   return 0;
 }
