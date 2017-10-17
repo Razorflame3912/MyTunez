@@ -23,6 +23,15 @@ struct node* insert_front(struct node *head, char *newname, char *newart){
   return new_node;
 }
 
+int list_len(struct node *head){
+  int i = 0;
+  while(head){
+    head = head->next;
+    i++;
+  }
+  return i;
+}
+
 struct node* free_list(struct node *head){
   while(head){
     struct node *tmp = head;
@@ -67,6 +76,7 @@ int main(){
   print_list(find_name(HEAD,"Chandelier"));
   print_list(find_artist(HEAD,"Imagine Dragons"));
   print_list(find_artist(HEAD,"Maroon 5"));
+  printf("Length of list is %d\n", list_len(HEAD));
   free_list(HEAD);
   //Test call of print_list to show free_list worked.
   //print_list(HEAD);
