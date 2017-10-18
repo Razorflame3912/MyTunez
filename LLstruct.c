@@ -23,7 +23,7 @@ void print_list(struct node *head){
         printf("%s by %s, ",tmp->name, tmp->artist);
         tmp = tmp->next;
     }
-    printf("\n\n");
+    printf("\n");
 }
 
 struct node* insert_front(struct node head[], char newname[], char newart[]){
@@ -191,6 +191,21 @@ struct node* insert_order(struct node head[], char newname[], char newart[]){
     return head;
 }
 
+struct node* remove_node(struct node *head, struct node *to_remove) {
+    if (head == to_remove) {
+        free(to_remove);
+        return NULL;
+    } else if (head->next == to_remove) {
+        struct node* tmp = head->next;
+        head->next = tmp->next;
+        free(tmp);
+        return head;
+    } else {
+        remove_node(head->next, to_remove);
+        return head;
+    }
+}
+
 int main(){
     srand(time(NULL));
     struct node *head = NULL;
@@ -221,6 +236,21 @@ int main(){
     head = free_list(head);
     //Test call of print_list to show free_list worked.
     printf("printing freed list...\n");
+    print_list(head);
+
+    head = insert_order(head, "unstoppable", "the score");
+    head = insert_order(head, "legend", "the score");
+    head = insert_order(head, "bohemian rhapsody", "queen");
+    printf("new list: ");
+    print_list(head);
+    printf("removing legend...\n");
+    head = remove_node(head, find_name(head, "legend"));
+    print_list(head);
+    printf("removing unstoppable...\n");
+    head = remove_node(head, find_name(head, "unstoppable"));
+    print_list(head);
+    printf("removing bohemian rhapsody...\n");
+    head = remove_node(head, find_name(head, "bohemian rhapsody"));
     print_list(head);
     return 0;
 }

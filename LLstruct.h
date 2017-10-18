@@ -1,0 +1,11 @@
+struct node;
+void to_lowercase(char str[]);
+void print_list(struct node *head);
+struct node* insert_front(struct node head[], char newname[], char newart[]);
+int list_len(struct node *head);
+struct node* free_list(struct node *head);
+struct node* find_name(struct node *head, char* s);
+struct node* find_artist(struct node *head, char* s);
+struct node* random_pick(struct node *head);
+struct node* insert_order(struct node head[], char newname[], char newart[]);
+struct node* remove_node(struct node *head, struct node *to_remove);
