@@ -281,3 +281,8 @@ void print_shuffle(struct node * arr[27], int i){
   }
 }
 
+void print_letter(struct node * arr[27], char c){
+  printf("%c songs:\n\t",c);
+  print_list(arr[c-97]);
+}
+

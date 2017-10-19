@@ -114,6 +114,7 @@ int main(){
     print_artist_songs(lib,"justin bieber");
 
     print_shuffle(lib,10);
+    print_letter(lib,'t');
 
     
 
