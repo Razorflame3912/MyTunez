@@ -274,3 +274,10 @@ struct node *random_lib(struct node *arr[27]){
   return NULL;
 }
 
+void print_shuffle(struct node * arr[27], int i){
+  for(i;i>0;i--){
+    struct node * pick = random_lib(arr);
+    printf("%s by %s\n",pick->name,pick->artist);
+  }
+}
+
