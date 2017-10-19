@@ -1,4 +1,8 @@
-struct node;
+struct node {
+    char name[256]; 
+    char artist[256]; 
+    struct node *next;
+};
 void to_lowercase(char str[]);
 void print_list(struct node *head);
 struct node* insert_front(struct node head[], char newname[], char newart[]);
@@ -9,3 +13,8 @@ struct node* find_artist(struct node *head, char* s);
 struct node* random_pick(struct node *head);
 struct node* insert_order(struct node head[], char newname[], char newart[]);
 struct node* remove_node(struct node *head, struct node *to_remove);
+struct node* remove_node(struct node *head, struct node *to_remove);
+struct node* lib_add(struct node *arr[27],char *newname, char *newart);
+struct node* lib_artist_pick(struct node *arr[27],char *artistname);
+void print_artist_songs(struct node *arr[27], char *artistname);
+void print_lib(struct node *arr[27]);
