@@ -18,3 +18,4 @@ struct node* lib_add(struct node *arr[27],char *newname, char *newart);
 struct node* lib_artist_pick(struct node *arr[27],char *artistname);
 void print_artist_songs(struct node *arr[27], char *artistname);
 void print_lib(struct node *arr[27]);
+struct node* random_lib(struct node *arr[27]);

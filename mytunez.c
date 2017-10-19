@@ -89,6 +89,7 @@ int main(){
     print_lib(lib);
     print_list(lib_artist_pick(lib,"mkto"));
     print_artist_songs(lib,"justin bieber");
+    print_list(random_lib(lib));
 
     return 0;
 }

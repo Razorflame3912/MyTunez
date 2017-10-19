@@ -248,3 +248,29 @@ void print_lib(struct node *arr[27]){
     }
 }
 
+struct node *random_lib(struct node *arr[27]){
+  int r = rand();
+  int i = 1;
+  int choose = 0;
+  int j = 0;
+  for(j;j<27;j++){
+    if(arr[j]){
+      choose++;
+    }
+  }
+
+  j=0;
+  while(i < 27){
+    if(r < (RAND_MAX/choose)*j){
+      if(arr[i]){
+	return random_pick(arr[i]);
+      }
+    }
+    else{
+      j++;
+    }
+    i++;
+  }
+  return NULL;
+}
+
