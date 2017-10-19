@@ -21,8 +21,8 @@ void to_lowercase(char str[]) {
 void print_list(struct node *head){
     struct node *tmp = head;
     while(tmp){
-      printf("%s by %s, ",tmp->name,tmp->artist);
-      tmp = tmp->next;
+        printf("%s by %s, ",tmp->name,tmp->artist);
+        tmp = tmp->next;
     }
     printf("\n");
 }
@@ -208,58 +208,67 @@ struct node* remove_node(struct node *head, struct node *to_remove) {
 }
 
 struct node* lib_add(struct node *arr[27],char *newname, char *newart){
-  int i = 0;
-  struct node* *tmp = arr;
-  for(i;i<27;i++){
-    if (newart[0] - (97 + i) == 0){
-      tmp[i] = insert_order(tmp[i], newname, newart);
-      return tmp[i];
+    int i = 0;
+    struct node* *tmp = arr;
+    for(i;i<27;i++){
+        if (newart[0] - (97 + i) == 0){
+            tmp[i] = insert_order(tmp[i], newname, newart);
+            return tmp[i];
+        }
     }
-  }
-  return NULL;
+    return NULL;
 }
 
 struct node* lib_artist_pick(struct node *arr[27],char *artistname){
-  int i = 0;
-  for(i;i<27;i++){
-    if(artistname[0] - (97+ i) == 0){
-      return find_artist(arr[i],artistname);
+    int i = 0;
+    for(i;i<27;i++){
+        if(artistname[0] - (97+ i) == 0){
+            return find_artist(arr[i],artistname);
+        }
     }
-  }
+    return NULL;
 }
 
 void print_artist_songs(struct node *arr[27], char *artistname){
-  printf("hi");
-  struct node *start = lib_artist_pick(arr,artistname);
-  while(strcmp(artistname,start->artist) == 0){
-    printf("%s by %s, ",start->name,start->artist);
-    start = start -> next;
-  }
-  printf("\n");
-
+    struct node *start = lib_artist_pick(arr,artistname);
+    while(start && strcmp(artistname,start->artist) == 0){
+        printf("%s by %s, ",start->name,start->artist);
+        start = start->next;
+    }
+    printf("\n");
 }
 
 void print_lib(struct node *arr[27]){
-  int i = 0;
-  for(i;i<26;i++){
-    printf("%c songs:\n\t",97 + i);
-    print_list(arr[i]);
-  }
+    int i = 0;
+    for(i;i<26;i++){
+        if (arr[i]) {
+            printf("%c songs:\n\t",97 + i);
+            print_list(arr[i]);
+        }
+    }
 }
 
 int main(){
     srand(time(NULL));
     struct node *head = NULL;
+
+    printf("adding demons...\n");
     head = insert_order(head, "demons", "imagine dragons");
     print_list(head);
+    printf("adding hello...\n");
     head = insert_order(head, "hello", "adele");
     print_list(head);
+    printf("adding baby...\n");
     head = insert_order(head, "baby", "justin bieber");
     print_list(head);
+    printf("adding radioactive...\n");
     head = insert_order(head, "radioactive", "imagine dragons");
     print_list(head);
+    printf("adding never say never...\n");
     head = insert_order(head, "never say never", "justin bieber");
     print_list(head);
+    printf("\n");
+
     printf("looking for hello...\n");
     print_list(find_name(head,"hello"));
     printf("looking for chandelier...\n");
@@ -269,36 +278,41 @@ int main(){
     printf("looking for maroon 5...\n");
     print_list(find_artist(head,"maroon 5"));
     printf("length of list is %d\n", list_len(head));
+    printf("\n");
 
+    printf("picking 10 random songs...\n");
     int n = 0;
     for(n; n < 10; n++){
         printf("%s\n",random_pick(head)->name);
     }
+    printf("\n");
+
     head = free_list(head);
-    //Test call of print_list to show free_list worked.
     printf("printing freed list...\n");
     print_list(head);
+    printf("\n");
 
+    printf("adding new songs...\n");
     head = insert_order(head, "unstoppable", "the score");
     head = insert_order(head, "legend", "the score");
     head = insert_order(head, "bohemian rhapsody", "queen");
     printf("new list: ");
     print_list(head);
-    printf("removing legend...\n");
+    printf("removing legend and reprinting...\n");
     head = remove_node(head, find_name(head, "legend"));
     print_list(head);
-    printf("removing unstoppable...\n");
+    printf("removing unstoppable and reprinting...\n");
     head = remove_node(head, find_name(head, "unstoppable"));
     print_list(head);
-    printf("removing bohemian rhapsody...\n");
+    printf("removing bohemian rhapsody and reprinting...\n");
     head = remove_node(head, find_name(head, "bohemian rhapsody"));
     print_list(head);
-    
+
     struct node * lib[27];
     lib[26] = 0;
     int i = 0;
     for(i;i<26;i++){
-      lib[i] = NULL;
+        lib[i] = NULL;
     }
 
     lib_add(lib,"demons","imagine dragons");
@@ -321,7 +335,6 @@ int main(){
     print_lib(lib);
     print_list(lib_artist_pick(lib,"mkto"));
     print_artist_songs(lib,"justin bieber");
-    
-    
+
     return 0;
 }
