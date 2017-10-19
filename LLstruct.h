@@ -21,3 +21,4 @@ void print_lib(struct node *arr[27]);
 struct node* random_lib(struct node *arr[27]);
 void print_shuffle(struct node * arr[27], int i);
 void print_letter(struct node * arr[27], char c);
+struct node *search_song(struct node * arr[27], char  *n, char *a);

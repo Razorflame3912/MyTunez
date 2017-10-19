@@ -286,3 +286,7 @@ void print_letter(struct node * arr[27], char c){
   print_list(arr[c-97]);
 }
 
+struct node *search_song(struct node * arr[27], char  *n, char *a){
+  return find_name(lib_artist_pick(arr,a),n);
+}
+

@@ -116,6 +116,8 @@ int main(){
     print_shuffle(lib,10);
     print_letter(lib,'t');
 
+    print_list(search_song(lib,"stitches","shawn mendes"));
+
     
 
     return 0;
