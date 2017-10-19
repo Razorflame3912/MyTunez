@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "LLstruct.h"
+#include <time.h>
+#include <string.h>
 
 int main(){
     srand(time(NULL));
@@ -86,6 +88,27 @@ int main(){
     lib_add(lib,"a thousand miles","vanessa carlton");
     lib_add(lib,"thriller","michael jackson");
     lib_add(lib,"can't help falling in love with you","twenty one pilots");
+    lib_add(lib,"the lazy song","bruno mars");
+    lib_add(lib,"uptown funk","bruno mars");
+    lib_add(lib,"just the way you are","bruno mars");
+    lib_add(lib,"that's what i like","bruno mars");
+    lib_add(lib,"marry you","bruno mars");
+    lib_add(lib,"i want it that way","backstreet boys");
+    lib_add(lib,"hotline bling","drake");
+    lib_add(lib,"one call away","charlie puth");
+    lib_add(lib,"never gonna give you up","rick astley");
+    lib_add(lib,"mans not hot","big shaq");
+    lib_add(lib,"don't wanna know","maroon 5");
+    lib_add(lib,"timber","ke$ha");
+    lib_add(lib,"despacito","luis fonsi");
+    lib_add(lib,"home","phillip phillips");
+    lib_add(lib,"for you","phillip phillips");
+    lib_add(lib,"bohemian rhapsody","queen");
+    lib_add(lib,"stitches","shawn mendes");
+    lib_add(lib,"treat you better","shawn mendes");
+    lib_add(lib,"something big","shawn mendes");
+    lib_add(lib,"shake it off","taylor swift");
+    
     print_lib(lib);
     print_list(lib_artist_pick(lib,"mkto"));
     print_artist_songs(lib,"justin bieber");
