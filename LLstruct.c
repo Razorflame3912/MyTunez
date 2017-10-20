@@ -249,44 +249,55 @@ void print_lib(struct node *arr[27]){
 }
 
 struct node *random_lib(struct node *arr[27]){
-  int r = rand();
-  int i = 1;
-  int choose = 0;
-  int j = 0;
-  for(j;j<27;j++){
-    if(arr[j]){
-      choose++;
+    int r = rand();
+    int i = 1;
+    int choose = 0;
+    int j = 0;
+    for(j;j<27;j++){
+        if(arr[j]){
+            choose++;
+        }
     }
-  }
 
-  j=0;
-  while(i < 27){
-    if(r < (RAND_MAX/choose)*j){
-      if(arr[i]){
-	return random_pick(arr[i]);
-      }
+    j=0;
+    while(i < 27){
+        if(r < (RAND_MAX/choose)*j){
+            if(arr[i]){
+                return random_pick(arr[i]);
+            }
+        }
+        else{
+            j++;
+        }
+        i++;
     }
-    else{
-      j++;
-    }
-    i++;
-  }
-  return NULL;
+    return NULL;
 }
 
 void print_shuffle(struct node * arr[27], int i){
-  for(i;i>0;i--){
-    struct node * pick = random_lib(arr);
-    printf("%s by %s\n",pick->name,pick->artist);
-  }
+    for(i;i>0;i--){
+        struct node * pick = random_lib(arr);
+        printf("%s by %s\n",pick->name,pick->artist);
+    }
 }
 
 void print_letter(struct node * arr[27], char c){
-  printf("%c songs:\n\t",c);
-  print_list(arr[c-97]);
+    printf("%c songs:\n\t",c);
+    print_list(arr[c-97]);
 }
 
 struct node *search_song(struct node * arr[27], char  *n, char *a){
-  return find_name(lib_artist_pick(arr,a),n);
+    return find_name(lib_artist_pick(arr,a),n);
 }
 
+void delete_song(struct node *arr[27], char *n, char *a) {
+    arr[a[0] - 97] = remove_node(arr[a[0] - 97], search_song(arr, n, a));
+}
+
+void delete_all_songs(struct node *arr[27]) {
+    int i;
+    for (i = 0; i < 27; i++) {
+        free_list(arr[i]);
+        arr[i] = NULL;
+    }
+}

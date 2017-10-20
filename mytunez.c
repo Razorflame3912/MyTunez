@@ -8,6 +8,7 @@ int main(){
     srand(time(NULL));
     struct node *head = NULL;
 
+    printf("=====TESTING LINKED LIST FUNCTIONS=====\n");
     printf("adding demons...\n");
     head = insert_order(head, "demons", "imagine dragons");
     print_list(head);
@@ -33,7 +34,7 @@ int main(){
     print_list(find_artist(head,"imagine dragons"));
     printf("looking for maroon 5...\n");
     print_list(find_artist(head,"maroon 5"));
-    printf("length of list is %d\n", list_len(head));
+    printf("length of current list: %d\n", list_len(head));
     printf("\n");
 
     printf("picking 10 random songs...\n");
@@ -54,25 +55,27 @@ int main(){
     head = insert_order(head, "bohemian rhapsody", "queen");
     printf("new list: ");
     print_list(head);
-    printf("removing legend and reprinting...\n");
+    printf("removing legend...\n");
     head = remove_node(head, find_name(head, "legend"));
     print_list(head);
-    printf("removing unstoppable and reprinting...\n");
+    printf("removing unstoppable...\n");
     head = remove_node(head, find_name(head, "unstoppable"));
     print_list(head);
-    printf("removing bohemian rhapsody and reprinting...\n");
+    printf("removing bohemian rhapsody...\n");
     head = remove_node(head, find_name(head, "bohemian rhapsody"));
+    printf("new list:\n");
     print_list(head);
 
+    printf("=====TESTING MUSIC LIBRARY FUNCTIONS=====\n");
     struct node * lib[27];
     lib[26] = 0;
     int i = 0;
-    for(i;i<26;i++){
+    for(i; i<26; i++){
         lib[i] = NULL;
     }
 
+    printf("adding a bunch of songs...\n");
     lib_add(lib,"demons","imagine dragons");
-    //print_lib(lib);
     lib_add(lib,"radioactive","imagine dragons");
     lib_add(lib,"believer","imagine dragons");
     lib_add(lib,"demons","imagine dragons");
@@ -108,17 +111,28 @@ int main(){
     lib_add(lib,"treat you better","shawn mendes");
     lib_add(lib,"something big","shawn mendes");
     lib_add(lib,"shake it off","taylor swift");
-    
     print_lib(lib);
-    print_list(lib_artist_pick(lib,"mkto"));
-    print_artist_songs(lib,"justin bieber");
+    printf("\n");
 
+    printf("testing shuffle...\n");
     print_shuffle(lib,10);
+    printf("printing songs under t...\n");
     print_letter(lib,'t');
-
+    printf("searching for mkto...\n");
+    print_list(lib_artist_pick(lib,"mkto"));
+    printf("searching for artist: justin bieber...\n");
+    print_artist_songs(lib,"justin bieber");
+    printf("searching for stitches by shawn mendes...\n");
     print_list(search_song(lib,"stitches","shawn mendes"));
+    printf("\n");
 
-    
+    printf("deleting stitches by shawn mendes and printing by artist...\n");
+    delete_song(lib, "stitches", "shawn mendes");
+    print_artist_songs(lib, "shawn mendes");
+    printf("\n");
 
+    printf("deleting all songs and printing library...\n");
+    delete_all_songs(lib);
+    print_lib(lib);
     return 0;
 }
