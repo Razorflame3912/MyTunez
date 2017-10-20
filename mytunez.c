@@ -8,7 +8,8 @@ int main(){
     srand(time(NULL));
     struct node *head = NULL;
 
-    printf("=====TESTING LINKED LIST FUNCTIONS=====\n");
+    printf("=====TESTING LINKED LIST FUNCTIONS=====\n\n");\
+    printf("TESTING INSERT_ORDER\n\n");
     printf("adding demons...\n");
     head = insert_order(head, "demons", "imagine dragons");
     print_list(head);
@@ -26,17 +27,22 @@ int main(){
     print_list(head);
     printf("\n");
 
+    printf("TESTING FIND_NAME\n\n");    
     printf("looking for hello...\n");
     print_list(find_name(head,"hello"));
     printf("looking for chandelier...\n");
     print_list(find_name(head,"chandelier"));
+    printf("TESTING FIND_ARTIST\n\n");    
     printf("looking for imagine dragons...\n");
     print_list(find_artist(head,"imagine dragons"));
     printf("looking for maroon 5...\n");
     print_list(find_artist(head,"maroon 5"));
+    printf("TESTING LIST_LEN(HELPER FUNCTION)\n\n");    
     printf("length of current list: %d\n", list_len(head));
     printf("\n");
 
+    
+    printf("TESTING RANDOM_PICK\n\n");    
     printf("picking 10 random songs...\n");
     int n = 0;
     for(n; n < 10; n++){
@@ -44,11 +50,13 @@ int main(){
     }
     printf("\n");
 
+    printf("TESTING FREE_LIST\n\n");        
     head = free_list(head);
     printf("printing freed list...\n");
     print_list(head);
     printf("\n");
 
+    printf("TESTING REMOVE_NODE\n\n");        
     printf("adding new songs...\n");
     head = insert_order(head, "unstoppable", "the score");
     head = insert_order(head, "legend", "the score");
@@ -74,6 +82,7 @@ int main(){
         lib[i] = NULL;
     }
 
+    printf("TESTING LIB_ADD\n\n");        
     printf("adding a bunch of songs...\n");
     lib_add(lib,"demons","imagine dragons");
     lib_add(lib,"radioactive","imagine dragons");
@@ -114,23 +123,29 @@ int main(){
     print_lib(lib);
     printf("\n");
 
-    printf("testing shuffle...\n");
-    print_shuffle(lib,10);
-    printf("printing songs under t...\n");
-    print_letter(lib,'t');
-    printf("searching for mkto...\n");
+
+
+    printf("\nTESTING PRINT_SHUFFLE\n\n");        
+    print_shuffle(lib,15);
+    printf("\nTESTING PRINT_LETTER\n\n");        
+    print_letter(lib,'t'); 
+    printf("\nTESTING LIB_ARTIST_PICK(POINTER)\n\n");        
     print_list(lib_artist_pick(lib,"mkto"));
-    printf("searching for artist: justin bieber...\n");
+    printf("\nTESTING PRINT_ARTIST_SONGS\n\n");
+    printf("searching for songs by justin bieber AKA satan...");
     print_artist_songs(lib,"justin bieber");
+    printf("\nTESTING SEARCH_SONG\n\n");        
     printf("searching for stitches by shawn mendes...\n");
     print_list(search_song(lib,"stitches","shawn mendes"));
     printf("\n");
-
+ 
+    printf("\nTESTING DELETE_SONG\n\n");        
     printf("deleting stitches by shawn mendes and printing by artist...\n");
     delete_song(lib, "stitches", "shawn mendes");
     print_artist_songs(lib, "shawn mendes");
     printf("\n");
 
+    printf("\nTESTING DELETE_ALL_SONGS\n\n");        
     printf("deleting all songs and printing library...\n");
     delete_all_songs(lib);
     print_lib(lib);
